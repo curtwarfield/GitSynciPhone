@@ -1,4 +1,3 @@
-
 ### Issue
 * How to configure **GitSync** on an iPhone to sync **Obsidian** notes with a self-hosted `Git` server.
 
@@ -190,12 +189,12 @@ With the Git server prepared and your vault pushed from the desktop, the next st
 
 3. **Transfer the Public Key to Your Desktop**
 * The easiest way to get the public SSH key off your iPhone:
-    1. Minimize GitSync after confirming the key. Do **not** close it.
-    2. Open Gmail, compose a new email to yourself, paste the key, and send it.
-    3. On your desktop computer, open Gmail and copy the key from the email.
+    * Minimize GitSync after confirming the key. Do **not** close it.
+    * Open Gmail, compose a new email to yourself, paste the key, and send it.
+    *  On your desktop computer, open Gmail and copy the key from the email.
 
 4. **Add the Public Key to the Git Server**
-   * Connect to the Git server via SSH:
+* Connect to the Git server via SSH:
 ```
 ssh user@your-server-domain
 ```
@@ -204,9 +203,10 @@ ssh user@your-server-domain
 vi /home/git/.ssh/authorized_keys
 ```
 * Paste the **public key** at the end of thee file.
+
 * Save and exit.
 
 
 5. **Add Repository in GitSync**
   
-  * Now go back to your iPhone and continue in GitSync.  
+  * Now go back to your iPhone and continue in GitSync.   
