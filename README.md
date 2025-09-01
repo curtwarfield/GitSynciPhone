@@ -1,3 +1,4 @@
+
 ### Issue
 * How to configure **GitSync** on an iPhone to sync **Obsidian** notes with a self-hosted `Git` server.
 
@@ -48,13 +49,14 @@ sudo chown -R git:git /git
 #### 5. Create a repository directory:
 Switch to the `git` user and create a directory for the new repository.
 
-Example:
+Example Output:
 ```
 mkdir /git/Server_Documentation.git
 ```
 #### 6. Initialize the repository:
 From inside the repository directory, initialize it as a bare `Git` repository:
 
+Example Output:
 ```
 cd /git/Server_Documentation.git
 ```
@@ -120,7 +122,11 @@ git init
 ``` 
 3. Add the **Git** server repository as a remote:
 ```
-git remote add origin git@your-server-address:/home/git/obsidian.git
+git remote add origin git@your-server-address:/home/git/obsidian-vault
+```
+Example Output:
+```
+git remote add origin git@exampleserver.com:/home/git/Server_Documentation.git
 ```
 4. Verify the remote is set:
 ```
@@ -150,5 +156,57 @@ git push origin master
 
 At this point, your desktop vault is fully backed up to the **Git** server and ready to sync with your iPhone.
 
-### Configure GitSync on iPhone
-With the **Git** server prepared, the next step is to configure **GitSync** on your iPhone to connect to the repository and begin syncing your **Obsidian** vault.
+### 5. Configure GitSync on iPhone
+With the Git server prepared and your vault pushed from the desktop, the next step is to configure GitSync on your iPhone to connect to the repository and begin syncing your Obsidian vault.
+
+1. **Install GitSync**
+* Download **GitSync** from the iOS App Store.
+
+* Open GitSync for the first time.
+
+* On the **Welcome Screen**, tap **Let’s Go**.
+
+* A notification prompt will appear — tap **OK**.
+
+* iOS will then display: *“GitSync would like to send you notifications.”* Choose **Allow**.
+
+* GitSync will show an *“Almost There”* popup. Tap **OK** to continue.
+
+* Next, an **Auth** screen will appear with the title *“Select your git provider and authenticate.”*
+  * In the dropdown menu (default: **GitHub**), choose `>_SSH`.
+
+2. **Generate SSH Keys in GitSync**
+* After selecting **SSH**, a new screen appears.
+
+* Tap the **Generate Keys** button.
+
+* GitSync will create a keypair and display:
+   * **Priv Key** (your private key — do not share this).
+   * **Pub Key** (your public key — this is what you’ll add to the Git server).
+
+* Tap the **copy icon** to the right of the **Pub Key** line.
+
+* When the **Confirm Pub Key** box appears, touch **Confirm** to complete copying the key.
+
+3. **Transfer the Public Key to Your Desktop**
+* The easiest way to get the public SSH key off your iPhone:
+    1. Minimize GitSync after confirming the key. Do **not** close it.
+    2. Open Gmail, compose a new email to yourself, paste the key, and send it.
+    3. On your desktop computer, open Gmail and copy the key from the email.
+
+4. **Add the Public Key to the Git Server**
+   * Connect to the Git server via SSH:
+```
+ssh user@your-server-domain
+```
+* Edit the `authorized_keys` file for the `git` user:
+```
+vi /home/git/.ssh/authorized_keys
+```
+* Paste the **public key** at the end of thee file.
+* Save and exit.
+
+
+5. **Add Repository in GitSync**
+  
+  * Now go back to your iPhone and continue in GitSync.  
